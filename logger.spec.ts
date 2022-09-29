@@ -1,15 +1,21 @@
-import {expect, jest, test} from '@jest/globals';
+import {expect, jest} from '@jest/globals';
+import {Logger} from './logger'
 
 const mockInfo = jest.fn();
-import {Logger} from './logger'
-jest.mock('./logger', ()=>{
+jest.mock('./logger', () => {
   return {
-    info: mockInfo
+    Logger: jest.fn().mockImplementation(() => {
+      return {
+        info: mockInfo
+      }
+    })
   }
-})
+});
+
 describe('repro', function () {
   it('uses a mock for new logger',()=>{
-    const logger = new Logger();
+    const logger = new Logger('debug');
     expect(jest.isMockFunction(logger.info)).toBeTruthy();
   })
 });
+

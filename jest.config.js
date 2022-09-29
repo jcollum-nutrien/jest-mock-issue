@@ -1,7 +1,7 @@
 module.exports = {
   clearMocks: true,
   transform: {
-    '.(js|ts)$': ['esbuild-jest', { sourcemap: true }],
+    '.(js|ts)$': ['babel-jest'],
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverage: true,
